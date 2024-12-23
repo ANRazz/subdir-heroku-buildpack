@@ -9,8 +9,8 @@ CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 DIST_FOLDER='dist/client'
 
-if [ -f $ENV_DIR/$DIST_FOLDER ]; then
-	PROJECT_PATH=`cat $ENV_DIR/$DIST_FOLDER`
+if [ -f $ENV_DIR/DIST_FOLDER ]; then
+	PROJECT_PATH=`cat $ENV_DIR/DIST_FOLDER`
 	echo "PROJECT_PATH: $PROJECT_PATH"
 
 	if [ -d $BUILD_DIR/$PROJECT_PATH ]; then
