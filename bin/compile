@@ -9,16 +9,35 @@ CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 
 PROJECT_PATH="`cat $ENV_DIR/PROJECT_PATH`"
-
 echo "PROJECT_PATH: $PROJECT_PATH"
 
 BUILD_FOLDER_PATH="${BUILD_DIR}/${PROJECT_PATH}"
-
 echo "BUILD_FOLDER: $BUILD_FOLDER_PATH"
 
 if [ -d $BUILD_FOLDER_PATH ]; then
   echo "ls -la in $BUILD_FOLDER_PATH"
   ls -la "$BUILD_FOLDER_PATH"
+
+  echo "-----> Subdir buildpack in $PROJECT_PATH"
+  echo "       creating cache: $CACHE_DIR"
+  mkdir -p $CACHE_DIR
+
+  TMP_DIR=`mktemp -d $CACHE_DIR/subdirXXXXX`
+  echo "       created tmp dir: $TMP_DIR"
+
+  echo "       moving working dir: $BUILD_FOLDER_PATH to $TMP_DIR"
+  cp -R "$BUILD_FOLDER_PATH"/* "$TMP_DIR"
+
+  echo "       cleaning build dir $BUILD_DIR"
+  rm -rf "$BUILD_DIR"/*
+
+  echo "       copying preserved work dir from cache $TMP_DIR to build dir $BUILD_DIR"
+
+  cp -R "$TMP_DIR"/* "$BUILD_DIR"/
+  echo "       cleaning tmp dir $TMP_DIR"
+  
+  rm -rf $TMP_DIR
+  exit 0
 else 
   echo "ls -la in $BUILD_DIR"
   ls -la "$BUILD_DIR"
