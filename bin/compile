@@ -26,6 +26,9 @@ if [ -f $ENV_DIR/PROJECT_PATH ]; then
 		rm -rf $TMP_DIR
 		exit 0
 	fi
+else
+	echo "Project path: $PROJECT_PATH"
+	echo "envDir: $ENV_DIR"
 fi
 
 echo "PROJECT_PATH is undefined"
