@@ -10,6 +10,13 @@ ENV_DIR=${3:-}
 
 ls $ENV_DIR
 
+PATH_FILE_1="`cat $ENV_DIR/PROJECT_PATH`"
+PATH_FILE_2="`cat $ENV_DIR\PROJECT_PATH`"
+
+
+echo "path_file_1 $PATH_FILE_1"
+echo "path_file_2 $PATH_FILE_2"
+
 echo "failure"
 exit 1
 
