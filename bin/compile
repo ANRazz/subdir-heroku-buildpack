@@ -10,7 +10,13 @@ ENV_DIR=${3:-}
 
 PROJECT_PATH="`cat $ENV_DIR/PROJECT_PATH`"
 
-if [ -d $BUILD_DIR/$PROJECT_PATH ]; then
+echo "PROJECT_PATH: $PROJECT_PATH"
+
+BUILD_FOLDER = $BUILD_DIR/$PROJECT_PATH;
+
+echo "BUILD_FOLDER: $BUILD_FOLDER"
+
+if [ -d $BUILD_FOLDER ]; then
   echo "-----> Subdir buildpack in $PROJECT_PATH"
   echo "       creating cache: $CACHE_DIR"
   mkdir -p $CACHE_DIR
