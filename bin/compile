@@ -19,8 +19,11 @@ echo "BUILD_FOLDER: $BUILD_FOLDER_PATH"
 if [ -d $BUILD_FOLDER_PATH ]; then
   echo "ls -la in $BUILD_FOLDER_PATH"
   ls -la "$BUILD_FOLDER_PATH"
-  
+else 
+  echo "ls -la in $BUILD_DIR"
+  ls -la "$BUILD_DIR"
 fi
+
 
 echo "failure"
 
