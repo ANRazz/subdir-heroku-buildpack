@@ -7,12 +7,12 @@ shopt -s dotglob
 BUILD_DIR=${1:-}
 CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
+DIST_FOLDER='dist/client'
 
-echo "Project path: $PROJECT_PATH"
-echo "envDir: $ENV_DIR"
+if [ -f $ENV_DIR/$DIST_FOLDER ]; then
+	PROJECT_PATH=`cat $ENV_DIR/$DIST_FOLDER`
+	echo "PROJECT_PATH: $PROJECT_PATH"
 
-if [ -f $ENV_DIR/$PROJECT_PATH ]; then
-	PROJECT_PATH=`cat $ENV_DIR/PROJECT_PATH`
 	if [ -d $BUILD_DIR/$PROJECT_PATH ]; then
 		echo "-----> Subdir buildpack in $PROJECT_PATH"
 		echo "       creating cache: $CACHE_DIR"
@@ -30,11 +30,11 @@ if [ -f $ENV_DIR/$PROJECT_PATH ]; then
 		exit 0
 	fi
 else
-	echo "Project path: $PROJECT_PATH"
+	echo "Dist folder: $DIST_FOLDER"
 	echo "envDir: $ENV_DIR"
 fi
 
-echo "PROJECT_PATH is undefined"
+echo "failure"
 exit 1
 
 
